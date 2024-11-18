@@ -17,11 +17,21 @@ class ControllerTest extends TestCase
 {
     use WithWorkbench;
 
+    private HealthChecker $healthChecker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->healthChecker = new Checker();
+
+        $this->app->bind(HealthChecker::class, function () {
+            return $this->healthChecker;
+        });
+    }
+
     public function test_success_probe(): void
     {
-        $checker = new Checker();
-        $this->app[HealthChecker::class] = $checker;
-        $checker->register($this->makeSuccessProbe());
+        $this->healthChecker->register($this->makeSuccessProbe());
 
         $this
             ->get(route('healthcheck'))
@@ -34,9 +44,7 @@ class ControllerTest extends TestCase
 
     public function test_one_failed_probe(): void
     {
-        $checker = new Checker();
-        $this->app[HealthChecker::class] = $checker;
-        $checker->register($this->makeFailureProbe('ShouldFailureProbe', 'foo'));
+        $this->healthChecker->register($this->makeFailureProbe('ShouldFailureProbe', 'foo'));
 
         $this
             ->get(route('healthcheck'))
@@ -54,9 +62,9 @@ class ControllerTest extends TestCase
     }
 
     /**
-     * @return MockInterface|Probe
+     * @return Probe|MockInterface
      */
-    private function makeSuccessProbe(): MockInterface
+    private function makeSuccessProbe()
     {
         $mock = $this->mock(Probe::class);
         $mock->expects('getName')->never();
@@ -68,7 +76,7 @@ class ControllerTest extends TestCase
     /**
      * @return MockInterface|Probe
      */
-    private function makeFailureProbe(string $name, string $errorMessage): MockInterface
+    private function makeFailureProbe(string $name, string $errorMessage)
     {
         $mock = $this->mock(Probe::class);
         $mock->expects('getName')->once()->andReturn($name);
