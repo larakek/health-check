@@ -17,6 +17,7 @@
         "illuminate/support": "^11.30"
     },
     "require-dev": {
+        "orchestra/testbench": "^9.5",
         "phpstan/phpstan": "^1.12",
         "phpunit/phpunit": "^11.4"
     },

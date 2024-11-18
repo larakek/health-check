@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Larakek\HealthCheck\Contracts;
 
-use Larakek\HealthCheck\CheckerResult;
+use Larakek\HealthCheck\ErrorBag;
 
 interface HealthChecker
 {
@@ -19,5 +19,5 @@ interface HealthChecker
     /**
      * Run all probes
      */
-    public function run(): CheckerResult;
+    public function run(): ErrorBag;
 }
