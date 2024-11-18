@@ -25,8 +25,8 @@ class Checker implements HealthChecker
         foreach ($this->probes as $probe) {
             try {
                 $probe->isHealthy();
-            } catch (Throwable $e) {
-                $resultBag->addError(probeName: $probe->getName(), e: $e);
+            } catch (Throwable $exception) {
+                $resultBag->pushException($probe->getName(), $exception);
             }
         }
 

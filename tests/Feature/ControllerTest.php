@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Larakek\HealthCheck\Tests\Feature;
 
 use Exception;
+use Larakek\HealthCheck\Checker;
 use Larakek\HealthCheck\Contracts\HealthChecker;
 use Larakek\HealthCheck\Contracts\Probe;
+use Mockery\MockInterface;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,15 +19,9 @@ class ControllerTest extends TestCase
 
     public function test_success_probe(): void
     {
-        $checker = $this->app->get(HealthChecker::class);
-
-        $mock = $this->mock(Probe::class);
-        $mock->expects('getName')
-            ->never();
-        $mock->expects('isHealthy')
-            ->once()
-            ->andReturn();
-        $checker->register($mock);
+        $checker = new Checker();
+        $this->app[HealthChecker::class] = $checker;
+        $checker->register($this->makeSuccessProbe());
 
         $this
             ->get(route('healthcheck'))
@@ -38,17 +34,9 @@ class ControllerTest extends TestCase
 
     public function test_one_failed_probe(): void
     {
-        /** @var HealthChecker $checker */
-        $checker = $this->app->get(HealthChecker::class);
-
-        $mock = $this->mock(Probe::class);
-        $mock->expects('getName')
-            ->once()
-            ->andReturn('ShouldFailureProbe');
-        $mock->expects('isHealthy')
-            ->once()
-            ->andThrow(new Exception('foo'));
-        $checker->register($mock);
+        $checker = new Checker();
+        $this->app[HealthChecker::class] = $checker;
+        $checker->register($this->makeFailureProbe('ShouldFailureProbe', 'foo'));
 
         $this
             ->get(route('healthcheck'))
@@ -63,5 +51,29 @@ class ControllerTest extends TestCase
                     'Failed ShouldFailureProbe with message "foo"',
                 ],
             ]);
+    }
+
+    /**
+     * @return MockInterface|Probe
+     */
+    private function makeSuccessProbe(): MockInterface
+    {
+        $mock = $this->mock(Probe::class);
+        $mock->expects('getName')->never();
+        $mock->expects('isHealthy')->once()->andReturnTrue();
+
+        return $mock;
+    }
+
+    /**
+     * @return MockInterface|Probe
+     */
+    private function makeFailureProbe(string $name, string $errorMessage): MockInterface
+    {
+        $mock = $this->mock(Probe::class);
+        $mock->expects('getName')->once()->andReturn($name);
+        $mock->expects('isHealthy')->once()->andThrow(new Exception($errorMessage));
+
+        return $mock;
     }
 }

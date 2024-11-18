@@ -9,14 +9,14 @@ use Throwable;
 interface Probe
 {
     /**
-     * Get probe name
+     * Get probe name.
      *
      * @return string
      */
     public function getName(): string;
 
     /**
-     * Run probe
+     * Run probe.
      *
      * @return bool
      * @throws Throwable
