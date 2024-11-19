@@ -12,7 +12,7 @@ use Mockery\MockInterface;
 
 class HealthCheckRunCommandTest extends AbstractTest
 {
-    public function test_success_probe(): void
+    public function testSuccessProbe(): void
     {
         $this->mock(HealthChecker::class, function (MockInterface $mock) {
             $mock
@@ -25,7 +25,7 @@ class HealthCheckRunCommandTest extends AbstractTest
             ->assertSuccessful();
     }
 
-    public function test_one_failed_probe(): void
+    public function testOneFailedProbe(): void
     {
         $this->mock(HealthChecker::class, function (MockInterface $mock) {
             $errorBag = new ErrorBag();

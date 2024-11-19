@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ControllerTest extends AbstractTest
 {
-    public function test_success_probe(): void
+    public function testSuccessProbe(): void
     {
         $this->mock(HealthChecker::class, function (MockInterface $mock) {
             $mock
@@ -31,7 +31,7 @@ class ControllerTest extends AbstractTest
             ]);
     }
 
-    public function test_one_failed_probe(): void
+    public function testOneFailedProbe(): void
     {
         $this->mock(HealthChecker::class, function (MockInterface $mock) {
             $errorBag = new ErrorBag();
