@@ -20,7 +20,7 @@ class Checker implements HealthChecker
 
     public function run(): ErrorBag
     {
-        $resultBag = new ErrorBag;
+        $resultBag = new ErrorBag();
 
         foreach ($this->probes as $probe) {
             try {

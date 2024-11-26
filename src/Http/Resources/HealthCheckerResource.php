@@ -40,9 +40,10 @@ class HealthCheckerResource extends JsonResource
     {
         return (new ResourceResponse($this))
             ->toResponse($request)
-            ->setStatusCode($this->resource->hasFailed()
+            ->setStatusCode(
+                $this->resource->hasFailed()
                 ? Response::HTTP_I_AM_A_TEAPOT
-                : Response::HTTP_OK
+                : Response::HTTP_OK,
             );
     }
 

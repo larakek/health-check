@@ -19,7 +19,7 @@ class ControllerTest extends AbstractTestCase
             $mock
                 ->expects('run')
                 ->once()
-                ->andReturn(new ErrorBag);
+                ->andReturn(new ErrorBag());
         });
 
         $this
@@ -34,7 +34,7 @@ class ControllerTest extends AbstractTestCase
     public function testOneFailedProbe(): void
     {
         $this->mock(HealthChecker::class, function (MockInterface $mock) {
-            $errorBag = new ErrorBag;
+            $errorBag = new ErrorBag();
             $errorBag->pushException('foo', new Exception('bar'));
 
             $mock

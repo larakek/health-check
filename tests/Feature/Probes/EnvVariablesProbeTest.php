@@ -35,7 +35,7 @@ class EnvVariablesProbeTest extends AbstractTestCase
             name: 'example failure probe',
             data: [],
             rules: ['FOO' => 'required', 'BAR' => 'required'],
-            messages: ['FOO' => 'FOO']
+            messages: ['FOO' => 'FOO'],
         );
 
         $this->expectException(ValidationException::class);

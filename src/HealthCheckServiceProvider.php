@@ -41,9 +41,10 @@ class HealthCheckServiceProvider extends ServiceProvider
                         callback: $factories[$config['class']],
                         parameters: [
                             'name' => $config['name'],
-                            'params' => $config['params'] ?? []]);
+                            'params' => $config['params'] ?? []],
+                    );
                 } else {
-                    return new $config['class'];
+                    return new $config['class']();
                 }
             });
 
@@ -58,11 +59,11 @@ class HealthCheckServiceProvider extends ServiceProvider
      */
     protected function registerConfig(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/health-check.php', 'health-check');
+        $this->mergeConfigFrom(__DIR__ . '/../config/health-check.php', 'health-check');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/health-check.php' => config_path('health-check.php'),
+                __DIR__ . '/../config/health-check.php' => config_path('health-check.php'),
             ], 'health-check');
         }
     }
@@ -73,7 +74,7 @@ class HealthCheckServiceProvider extends ServiceProvider
     protected function registerRoutes(): void
     {
         if (config('health-check.settings.register_healthcheck_route')) {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         }
     }
 
