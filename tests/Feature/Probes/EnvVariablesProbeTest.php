@@ -16,7 +16,11 @@ class EnvVariablesProbeTest extends AbstractTestCase
      */
     public function testThrowsException(): void
     {
-        $probe = new EnvVariablesProbe([], ['FOO' => 'required', 'BAR' => 'required'], ['FOO' => 'FOO']);
+        $probe = new EnvVariablesProbe(
+            data: [],
+            rules: ['FOO' => 'required', 'BAR' => 'required'],
+            messages: ['FOO' => 'FOO']
+        );
 
         $this->expectException(ValidationException::class);
         $this->expectExceptionMessage('FOO (and 1 more error)');
