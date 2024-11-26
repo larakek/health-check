@@ -1,5 +1,7 @@
 parameters:
   paths:
+    - config
+    - routes
     - src
 
   level: 8

@@ -14,9 +14,25 @@ class EnvVariablesProbeTest extends AbstractTestCase
     /**
      * @throws Throwable
      */
+    public function testSuccessProbe(): void
+    {
+        $probe = new EnvVariablesProbe(
+            name: 'example success probe',
+            data: [],
+            rules: [],
+            messages: [],
+        );
+
+        self::assertTrue($probe->isHealthy());
+    }
+
+    /**
+     * @throws Throwable
+     */
     public function testThrowsException(): void
     {
         $probe = new EnvVariablesProbe(
+            name: 'example failure probe',
             data: [],
             rules: ['FOO' => 'required', 'BAR' => 'required'],
             messages: ['FOO' => 'FOO']

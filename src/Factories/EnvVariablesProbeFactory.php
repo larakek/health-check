@@ -8,6 +8,11 @@ use Larakek\HealthCheck\Probes\EnvVariablesProbe;
 
 class EnvVariablesProbeFactory
 {
+    /**
+     * @param string $name
+     * @param array<string,string> $params
+     * @return EnvVariablesProbe
+     */
     public function __invoke(string $name, array $params): EnvVariablesProbe
     {
         $data = [];
@@ -17,6 +22,6 @@ class EnvVariablesProbeFactory
             $messages[$key] = $key;
         }
 
-        return new EnvVariablesProbe($data, $params, $messages);
+        return new EnvVariablesProbe($name, $data, $params, $messages);
     }
 }

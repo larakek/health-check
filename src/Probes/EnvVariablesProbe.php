@@ -10,26 +10,34 @@ use Larakek\HealthCheck\Contracts\Probe;
 class EnvVariablesProbe implements Probe
 {
     /**
-     * @var array
+     * @var string
+     */
+    private string $name;
+
+    /**
+     * @var array<string,mixed>
      */
     private array $data;
 
     /**
-     * @var array
+     * @var array<string,mixed>
      */
     private array $rules;
 
     /**
-     * @var array
+     * @var array<string,string>
      */
     private array $messages;
 
     /**
-     * @param array $data
-     * @param array $rules
+     * @param string $name
+     * @param array<string,mixed> $data
+     * @param array<string,mixed> $rules
+     * @param array<string,string> $messages
      */
-    public function __construct(array $data, array $rules, array $messages)
+    public function __construct(string $name, array $data, array $rules, array $messages)
     {
+        $this->name = $name;
         $this->data = $data;
         $this->rules = $rules;
         $this->messages = $messages;
@@ -37,14 +45,16 @@ class EnvVariablesProbe implements Probe
 
     public function getName(): string
     {
-        return class_basename($this);
+        return $this->name;
     }
 
     public function isHealthy(): bool
     {
-        Validator::validate($this->data, $this->rules, $this->messages, [
-            'BAR' => '__BAR__',
-        ]);
+        Validator::validate(
+            data: $this->data,
+            rules: $this->rules,
+            messages: $this->messages,
+        );
 
         return true;
     }

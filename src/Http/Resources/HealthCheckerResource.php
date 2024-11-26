@@ -46,6 +46,11 @@ class HealthCheckerResource extends JsonResource
             );
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return array<string,mixed>
+     */
     public function toArray(Request $request): array
     {
         $data = ['message' => 'ok'];
