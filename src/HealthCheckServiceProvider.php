@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Larakek\HealthCheck;
 
+use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\ServiceProvider;
 use Larakek\HealthCheck\Console\HealthCheckRunCommand;
@@ -23,6 +24,7 @@ class HealthCheckServiceProvider extends ServiceProvider
      *
      * @return void
      * @throws BindingResolutionException
+     * @throws Exception
      */
     public function boot(): void
     {
