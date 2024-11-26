@@ -12,13 +12,13 @@
     ],
     "require": {
         "php": "^8.2|^8.3",
-        "illuminate/console": "^11.30",
-        "illuminate/contracts": "^11.30",
-        "illuminate/support": "^11.30"
+        "illuminate/console": ">=9.0",
+        "illuminate/contracts": ">=9.0",
+        "illuminate/support": ">=9.0"
     },
     "require-dev": {
         "laravel/pint": "^1.18",
-        "orchestra/testbench": "^9.5",
+        "orchestra/testbench": "^9.6",
         "phpstan/phpstan": "^1.12",
         "phpunit/phpunit": "^11.4"
     },
