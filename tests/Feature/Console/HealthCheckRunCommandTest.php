@@ -7,10 +7,10 @@ namespace Larakek\HealthCheck\Tests\Feature\Console;
 use Exception;
 use Larakek\HealthCheck\Contracts\HealthChecker;
 use Larakek\HealthCheck\ErrorBag;
-use Larakek\HealthCheck\Tests\AbstractTest;
+use Larakek\HealthCheck\Tests\AbstractTestCase;
 use Mockery\MockInterface;
 
-class HealthCheckRunCommandTest extends AbstractTest
+class HealthCheckRunCommandTest extends AbstractTestCase
 {
     public function testSuccessProbe(): void
     {

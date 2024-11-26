@@ -7,7 +7,7 @@ namespace Larakek\HealthCheck\Tests;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase;
 
-abstract class AbstractTest extends TestCase
+abstract class AbstractTestCase extends TestCase
 {
     use WithWorkbench;
 }

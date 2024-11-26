@@ -8,14 +8,13 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\ServiceProvider;
 use Larakek\HealthCheck\Console\HealthCheckRunCommand;
 use Larakek\HealthCheck\Contracts\HealthChecker;
-use Larakek\HealthCheck\Probes\FailureProbe;
 
 class HealthCheckServiceProvider extends ServiceProvider
 {
     /**
      * @var array|string[]
      */
-    public array $bindings = [
+    public array $singletons = [
         HealthChecker::class => Checker::class,
     ];
 
@@ -27,13 +26,35 @@ class HealthCheckServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        /** @var HealthChecker $checker */
-        $checker = $this->app->make(HealthChecker::class);
-        $checker->register(new FailureProbe());
-        // TODO remove code above
-
+        $this->registerConfig();
         $this->registerRoutes();
         $this->registerCommands();
+
+        /** @var HealthChecker $checker */
+        $checker = $this->app->make(HealthChecker::class);
+        /** @var ProbesResolver $resolver */
+        $resolver = $this->app->make(ProbesResolver::class);
+        foreach (config('health-check.probes') as $config) {
+            if ($config['enabled']) {
+                $checker->register($resolver->resolve($config['class'], $config['params']));
+            }
+        }
+    }
+
+    /**
+     * Register the package config.
+     *
+     * @return void
+     */
+    protected function registerConfig(): void
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../config/health-check.php', 'health-check');
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../config/health-check.php' => config_path('health-check.php'),
+            ], 'health-check');
+        }
     }
 
     /**
@@ -43,7 +64,9 @@ class HealthCheckServiceProvider extends ServiceProvider
      */
     protected function registerRoutes(): void
     {
-        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        if (config('health-check.settings.register_healthcheck_route')) {
+            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        }
     }
 
     /**

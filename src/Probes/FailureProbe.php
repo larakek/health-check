@@ -10,7 +10,7 @@ class FailureProbe implements Probe
 {
     public function getName(): string
     {
-        return 'failure probe';
+        return class_basename($this);
     }
 
     public function isHealthy(): bool
