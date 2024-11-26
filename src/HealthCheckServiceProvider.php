@@ -22,7 +22,6 @@ class HealthCheckServiceProvider extends ServiceProvider
     /**
      * Bootstrap any package services.
      *
-     * @return void
      * @throws BindingResolutionException
      * @throws Exception
      */
@@ -56,36 +55,30 @@ class HealthCheckServiceProvider extends ServiceProvider
 
     /**
      * Register the package config.
-     *
-     * @return void
      */
     protected function registerConfig(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/health-check.php', 'health-check');
+        $this->mergeConfigFrom(__DIR__.'/../config/health-check.php', 'health-check');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/health-check.php' => config_path('health-check.php'),
+                __DIR__.'/../config/health-check.php' => config_path('health-check.php'),
             ], 'health-check');
         }
     }
 
     /**
      * Register the package routes.
-     *
-     * @return void
      */
     protected function registerRoutes(): void
     {
         if (config('health-check.settings.register_healthcheck_route')) {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         }
     }
 
     /**
      * Register the package commands.
-     *
-     * @return void
      */
     protected function registerCommands(): void
     {

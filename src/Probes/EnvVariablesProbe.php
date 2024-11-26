@@ -9,9 +9,6 @@ use Larakek\HealthCheck\Contracts\Probe;
 
 class EnvVariablesProbe implements Probe
 {
-    /**
-     * @var string
-     */
     private string $name;
 
     /**
@@ -30,10 +27,9 @@ class EnvVariablesProbe implements Probe
     private array $messages;
 
     /**
-     * @param string $name
-     * @param array<string,mixed> $data
-     * @param array<string,mixed> $rules
-     * @param array<string,string> $messages
+     * @param  array<string,mixed>  $data
+     * @param  array<string,mixed>  $rules
+     * @param  array<string,string>  $messages
      */
     public function __construct(string $name, array $data, array $rules, array $messages)
     {

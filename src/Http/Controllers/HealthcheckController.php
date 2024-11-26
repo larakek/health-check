@@ -9,10 +9,6 @@ use Larakek\HealthCheck\Http\Resources\HealthCheckerResource;
 
 class HealthcheckController
 {
-    /**
-     * @param HealthChecker $healthChecker
-     * @return HealthCheckerResource
-     */
     public function __invoke(HealthChecker $healthChecker): HealthCheckerResource
     {
         $result = $healthChecker->run();

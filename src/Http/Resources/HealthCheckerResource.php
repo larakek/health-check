@@ -14,19 +14,19 @@ use Symfony\Component\HttpFoundation\Response;
 class HealthCheckerResource extends JsonResource
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
      * @var ErrorBag
      */
     public $resource;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static $wrap = null;
 
     /**
-     * @inheritDoc
-     * @param ErrorBag $result
+     * {@inheritDoc}
      */
     public function __construct(ErrorBag $result)
     {
@@ -34,7 +34,7 @@ class HealthCheckerResource extends JsonResource
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function toResponse($request): JsonResponse
     {
@@ -47,8 +47,6 @@ class HealthCheckerResource extends JsonResource
     }
 
     /**
-     * @param Request $request
-     *
      * @return array<string,mixed>
      */
     public function toArray(Request $request): array

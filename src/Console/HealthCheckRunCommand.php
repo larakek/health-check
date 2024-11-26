@@ -25,9 +25,6 @@ class HealthCheckRunCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @param HealthChecker $healthChecker
-     * @return int
      */
     public function handle(HealthChecker $healthChecker): int
     {

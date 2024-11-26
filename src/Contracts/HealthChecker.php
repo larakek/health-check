@@ -10,9 +10,6 @@ interface HealthChecker
 {
     /**
      * Push the simple probe into the end of queue
-     *
-     * @param Probe $probe
-     * @return void
      */
     public function register(Probe $probe): void;
 
