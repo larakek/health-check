@@ -34,11 +34,22 @@ class HealthCheckServiceProvider extends ServiceProvider
 
         /** @var HealthChecker $checker */
         $checker = $this->app->make(HealthChecker::class);
-        /** @var ProbesResolver $resolver */
-        $resolver = $this->app->make(ProbesResolver::class);
+        $factories = config('health-check.factories');
         foreach (config('health-check.probes') as $config) {
+            $this->app->bind($config['class'], function () use ($factories, $config) {
+                if (isset($factories[$config['class']])) {
+                    return $this->app->call(
+                        callback: $factories[$config['class']],
+                        parameters: [
+                            'name' => $config['name'],
+                            'params' => $config['params'] ?? []]);
+                } else {
+                    return new $config['class'];
+                }
+            });
+
             if ($config['enabled']) {
-                $checker->register($resolver->resolve($config['class'], $config['params']));
+                $checker->register($this->app->make($config['class']));
             }
         }
     }

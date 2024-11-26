@@ -6,7 +6,6 @@ namespace Larakek\HealthCheck\Tests\Feature\Probes;
 
 use Illuminate\Validation\ValidationException;
 use Larakek\HealthCheck\Probes\EnvVariablesProbe;
-use Larakek\HealthCheck\ProbesResolver;
 use Larakek\HealthCheck\Tests\AbstractTestCase;
 use Throwable;
 
@@ -17,11 +16,7 @@ class EnvVariablesProbeTest extends AbstractTestCase
      */
     public function testThrowsException(): void
     {
-        $probe = $this->app->make(ProbesResolver::class)->resolve(
-            EnvVariablesProbe::class,
-            ['FOO' => 'required', 'BAR' => 'required']
-        );
-
+        $probe = new EnvVariablesProbe([], ['FOO' => 'required', 'BAR' => 'required'], ['FOO' => 'FOO']);
 
         $this->expectException(ValidationException::class);
         $this->expectExceptionMessage('FOO (and 1 more error)');
