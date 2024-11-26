@@ -22,6 +22,7 @@ class HealthCheckRunCommandTest extends AbstractTestCase
         });
 
         $this->artisan('health-check:run')
+            ->doesntExpectOutputToContain('Failed')
             ->assertSuccessful();
     }
 
@@ -38,6 +39,26 @@ class HealthCheckRunCommandTest extends AbstractTestCase
         });
 
         $this->artisan('health-check:run')
-            ->assertFailed();
+            ->assertFailed()
+            ->expectsOutput('Failed foo with message "bar"');
+    }
+
+    public function testTwoFailedProbes(): void
+    {
+        $this->mock(HealthChecker::class, function (MockInterface $mock) {
+            $errorBag = new ErrorBag();
+            $errorBag->pushException('foo', new Exception('bar'));
+            $errorBag->pushException('bar', new Exception('baz'));
+
+            $mock
+                ->expects('run')
+                ->once()
+                ->andReturn($errorBag);
+        });
+
+        $this->artisan('health-check:run')
+            ->assertFailed()
+            ->expectsOutput('Failed foo with message "bar"')
+            ->expectsOutput('Failed bar with message "baz"');
     }
 }

@@ -30,8 +30,13 @@ class HealthCheckRunCommand extends Command
     {
         $result = $healthChecker->run();
 
-        return $result->hasFailed()
-            ? self::FAILURE
-            : self::SUCCESS;
+        if ($result->hasFailed()) {
+            foreach ($result->getErrors() as $error) {
+                $this->error($error);
+            }
+            return self::FAILURE;
+        }
+
+        return self::SUCCESS;
     }
 }
