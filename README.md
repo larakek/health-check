@@ -5,4 +5,4 @@
 
 Health Check is a package for the Laravel application that allows you to understand if your application is unhealthy. 
 
-The package could handle http probes and command probes.
+The package can handle http probes and command probes.
