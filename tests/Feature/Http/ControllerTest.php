@@ -7,11 +7,11 @@ namespace Larakek\HealthCheck\Tests\Feature\Http;
 use Exception;
 use Larakek\HealthCheck\Contracts\HealthChecker;
 use Larakek\HealthCheck\ErrorBag;
-use Larakek\HealthCheck\Tests\AbstractTestCase;
+use Larakek\HealthCheck\Tests\TestCase;
 use Mockery\MockInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-class ControllerTest extends AbstractTestCase
+class ControllerTest extends TestCase
 {
     public function testSuccessProbe(): void
     {

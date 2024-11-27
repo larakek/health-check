@@ -33,8 +33,8 @@ class HealthCheckServiceProvider extends ServiceProvider
 
         /** @var HealthChecker $checker */
         $checker = $this->app->make(HealthChecker::class);
-        $factories = config('health-check.factories');
-        foreach (config('health-check.probes') as $config) {
+        $factories = config('health-check.factories', []);
+        foreach (config('health-check.probes', []) as $config) {
             $this->app->bind($config['class'], function () use ($factories, $config) {
                 if (isset($factories[$config['class']])) {
                     return $this->app->call(

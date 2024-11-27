@@ -6,10 +6,10 @@ namespace Larakek\HealthCheck\Tests\Feature\Probes;
 
 use Illuminate\Validation\ValidationException;
 use Larakek\HealthCheck\Probes\EnvVariablesProbe;
-use Larakek\HealthCheck\Tests\AbstractTestCase;
+use Larakek\HealthCheck\Tests\TestCase;
 use Throwable;
 
-class EnvVariablesProbeTest extends AbstractTestCase
+class EnvVariablesProbeTest extends TestCase
 {
     /**
      * @throws Throwable

@@ -1,2 +1,0 @@
-providers:
-  - Larakek\HealthCheck\HealthCheckServiceProvider
