@@ -1,8 +1,9 @@
 <?php
 
+use Larakek\HealthCheck\Factories\DatabaseConnectionProbeFactory;
 use Larakek\HealthCheck\Factories\EnvVariablesProbeFactory;
+use Larakek\HealthCheck\Probes\DatabaseConnectionProbe;
 use Larakek\HealthCheck\Probes\EnvVariablesProbe;
-use Larakek\HealthCheck\Probes\FailureProbe;
 
 return [
     'settings' => [
@@ -14,18 +15,20 @@ return [
             'enabled' => true,
             'class' => EnvVariablesProbe::class,
             'params' => [
-                'FOO' => ['required', 'string'],
-                'BAR' => 'required|bool',
-                'BAZ' => 'required',
+                'APP_KEY' => ['required', 'string'],
             ],
         ],
         [
             'enabled' => true,
-            'class' => FailureProbe::class,
+            'class' => DatabaseConnectionProbe::class,
+            'params' => [
+                'connection_name' => env('DB_CONNECTION', 'mysql'),
+            ],
         ],
     ],
 
     'factories' => [
+        DatabaseConnectionProbe::class => DatabaseConnectionProbeFactory::class,
         EnvVariablesProbe::class => EnvVariablesProbeFactory::class,
     ],
 ];
