@@ -1,0 +1,47 @@
+{
+    "name": "larakek/health-check",
+    "description": "Health checks for laravel application",
+    "keywords": ["laravel"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Любимов Алексей",
+            "email": "alex.shieldcorp@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2|^8.3",
+        "illuminate/console": "^10.0|^11.0",
+        "illuminate/contracts": "^10.0|^11.0",
+        "illuminate/support": "^10.0|^11.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.18",
+        "orchestra/testbench": "^8.0|^9.0",
+        "phpstan/phpstan": "^1.12",
+        "phpunit/phpunit": "^9.3|^10.4|^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Larakek\\HealthCheck\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Larakek\\HealthCheck\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Larakek\\HealthCheck\\HealthCheckServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
