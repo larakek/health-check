@@ -11,7 +11,6 @@ return [
 
     'probes' => [
         [
-            'name' => 'test env variables probe',
             'enabled' => true,
             'class' => EnvVariablesProbe::class,
             'params' => [
@@ -21,7 +20,6 @@ return [
             ],
         ],
         [
-            'name' => 'probe that always failed',
             'enabled' => true,
             'class' => FailureProbe::class,
         ],

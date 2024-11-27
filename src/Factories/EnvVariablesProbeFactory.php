@@ -11,7 +11,7 @@ class EnvVariablesProbeFactory
     /**
      * @param  array<string,string>  $params
      */
-    public function __invoke(string $name, array $params): EnvVariablesProbe
+    public function __invoke(array $params): EnvVariablesProbe
     {
         $data = [];
         $messages = [];
@@ -20,6 +20,6 @@ class EnvVariablesProbeFactory
             $messages[$key] = $key;
         }
 
-        return new EnvVariablesProbe($name, $data, $params, $messages);
+        return new EnvVariablesProbe($data, $params, $messages);
     }
 }

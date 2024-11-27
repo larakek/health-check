@@ -17,7 +17,6 @@ class EnvVariablesProbeTest extends TestCase
     public function testSuccessProbe(): void
     {
         $probe = new EnvVariablesProbe(
-            name: 'example success probe',
             data: [],
             rules: [],
             messages: [],
@@ -32,7 +31,6 @@ class EnvVariablesProbeTest extends TestCase
     public function testThrowsException(): void
     {
         $probe = new EnvVariablesProbe(
-            name: 'example failure probe',
             data: [],
             rules: ['FOO' => 'required', 'BAR' => 'required'],
             messages: ['FOO' => 'FOO'],

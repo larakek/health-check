@@ -40,7 +40,6 @@ class HealthCheckServiceProvider extends ServiceProvider
                     return $this->app->call(
                         callback: $factories[$config['class']],
                         parameters: [
-                            'name' => $config['name'],
                             'params' => $config['params'] ?? []],
                     );
                 } else {
