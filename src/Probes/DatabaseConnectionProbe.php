@@ -32,7 +32,7 @@ class DatabaseConnectionProbe implements Probe
     {
         $this->databaseManager
             ->connection($this->connection)
-            ->select('true');
+            ->select('select true');
 
         return true;
     }

@@ -6,9 +6,11 @@ namespace Larakek\HealthCheck;
 
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Larakek\HealthCheck\Console\HealthCheckRunCommand;
 use Larakek\HealthCheck\Contracts\HealthChecker;
+use Larakek\HealthCheck\Http\Controllers\HealthcheckController;
 
 class HealthCheckServiceProvider extends ServiceProvider
 {
@@ -73,7 +75,8 @@ class HealthCheckServiceProvider extends ServiceProvider
     protected function registerRoutes(): void
     {
         if (config('health-check.settings.register_healthcheck_route')) {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+            Route::get(config('health-check.settings.route_path'), HealthcheckController::class)
+                ->name('healthcheck');
         }
     }
 

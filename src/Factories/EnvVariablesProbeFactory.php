@@ -14,12 +14,12 @@ class EnvVariablesProbeFactory
     public function __invoke(array $params): EnvVariablesProbe
     {
         $data = [];
-        $messages = [];
+        $attributes = [];
         foreach ($params as $key => $value) {
             $data[$key] = env($key);
-            $messages[$key] = $key;
+            $attributes[$key] = $key;
         }
 
-        return new EnvVariablesProbe($data, $params, $messages);
+        return new EnvVariablesProbe($data, $params, [], $attributes);
     }
 }

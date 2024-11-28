@@ -20,6 +20,7 @@ class EnvVariablesProbeTest extends TestCase
             data: [],
             rules: [],
             messages: [],
+            attributes: [],
         );
 
         self::assertTrue($probe->isHealthy());
@@ -33,11 +34,12 @@ class EnvVariablesProbeTest extends TestCase
         $probe = new EnvVariablesProbe(
             data: [],
             rules: ['FOO' => 'required', 'BAR' => 'required'],
-            messages: ['FOO' => 'FOO'],
+            messages: [],
+            attributes: ['FOO' => 'FOO'],
         );
 
         $this->expectException(ValidationException::class);
-        $this->expectExceptionMessage('FOO (and 1 more error)');
+        $this->expectExceptionMessage('The FOO field is required. (and 1 more error)');
         $probe->isHealthy();
     }
 }

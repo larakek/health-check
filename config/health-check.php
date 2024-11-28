@@ -8,6 +8,7 @@ use Larakek\HealthCheck\Probes\EnvVariablesProbe;
 return [
     'settings' => [
         'register_healthcheck_route' => true,
+        'route_path' => '/healthcheck',
     ],
 
     'probes' => [

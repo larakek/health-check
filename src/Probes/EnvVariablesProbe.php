@@ -25,15 +25,22 @@ class EnvVariablesProbe implements Probe
     private array $messages;
 
     /**
+     * @var array<string,string>
+     */
+    private array $attributes;
+
+    /**
      * @param  array<string,mixed>  $data
      * @param  array<string,mixed>  $rules
      * @param  array<string,string>  $messages
+     * @param  array<string,string>  $attributes
      */
-    public function __construct(array $data, array $rules, array $messages)
+    public function __construct(array $data, array $rules, array $messages, array $attributes)
     {
         $this->data = $data;
         $this->rules = $rules;
         $this->messages = $messages;
+        $this->attributes = $attributes;
     }
 
     public function getName(): string
@@ -47,6 +54,7 @@ class EnvVariablesProbe implements Probe
             data: $this->data,
             rules: $this->rules,
             messages: $this->messages,
+            attributes: $this->attributes,
         );
 
         return true;
