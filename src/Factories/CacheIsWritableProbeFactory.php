@@ -19,6 +19,7 @@ class CacheIsWritableProbeFactory
     {
         return new CacheIsWritableProbe(
             cache: app()->make(Repository::class),
+            cacheKey: $params['cache_key'],
         );
     }
 }

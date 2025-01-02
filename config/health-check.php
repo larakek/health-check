@@ -37,6 +37,9 @@ return [
         [
             'enabled' => true,
             'class' => CacheIsWritableProbe::class,
+            'params' => [
+                'cache_key' => 'unique_cache_key_name_for_application_instance',
+            ],
         ],
     ],
 

@@ -6,13 +6,12 @@ namespace Larakek\HealthCheck\Probes;
 
 use Exception;
 use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Support\Str;
 use Larakek\HealthCheck\Contracts\Probe;
 
 class CacheIsWritableProbe implements Probe
 {
-    private const CACHE_KEY = 'cache_is_writable_probe';
-
-    public function __construct(private readonly Repository $cache) {}
+    public function __construct(private readonly Repository $cache, private string $cacheKey) {}
 
     public function getName(): string
     {
@@ -21,11 +20,14 @@ class CacheIsWritableProbe implements Probe
 
     public function isHealthy(): bool
     {
-        $this->cache->delete(self::CACHE_KEY);
-        $this->cache->put(self::CACHE_KEY, $timestamp = now()->timestamp);
+        $expectedValue = Str::random(8);
+        $cacheKey = sprintf('%s_%s', $this->cacheKey, now()->timestamp);
+        $this->cache->put($cacheKey, $expectedValue, now()->addSeconds(10));
+        $actualValue = $this->cache->get($cacheKey);
+        $this->cache->delete($cacheKey);
 
-        if ($timestamp !== $this->cache->get(self::CACHE_KEY)) {
-            throw new Exception(sprintf('%s returned incorrect value', $this->getName()));
+        if ($expectedValue !== $actualValue) {
+            throw new Exception(sprintf('%s received incorrect value', $this->getName()));
         }
 
         return true;
