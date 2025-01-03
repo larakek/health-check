@@ -59,9 +59,4 @@ jobs:
           composer update --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests with phpunit
-        run: vendor/bin/phpunit --coverage-clover=coverage.xml
-        with:
-          coverage_clover: "coverage.xml"
-        env:
-          DB_PORT: ${{ job.services.postgres.ports[5432] }}
-          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+        run: vendor/bin/phpunit
