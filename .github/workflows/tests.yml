@@ -65,9 +65,3 @@ jobs:
         env:
           DB_PORT: ${{ job.services.postgres.ports[5432] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
-
-      - uses: actions/upload-artifact@v4
-        if: failure() || success()
-        with:
-          name: laravel-failure-artifact
-          path: storage/logs/laravel.log
