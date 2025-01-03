@@ -59,4 +59,7 @@ jobs:
           composer update --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests with phpunit
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --coverage-clover=coverage.xml
+        with:
+          coverage_clover: "coverage.xml"
+
