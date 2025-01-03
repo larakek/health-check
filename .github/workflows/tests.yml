@@ -60,6 +60,5 @@ jobs:
 
       - name: Execute tests with phpunit
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
-        with:
-          coverage_clover: "coverage.xml"
-
+        env:
+          DB_PORT: ${{ job.services.postgres.ports[5432] }}
