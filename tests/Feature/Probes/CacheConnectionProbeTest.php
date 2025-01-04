@@ -19,6 +19,7 @@ class CacheConnectionProbeTest extends TestCase
     {
         $probe = new CacheConnectionProbe($this->app->make(Repository::class));
 
+        self::assertNotEmpty($probe->getName());
         self::assertTrue($probe->isHealthy());
     }
 

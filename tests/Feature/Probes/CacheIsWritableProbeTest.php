@@ -18,6 +18,7 @@ class CacheIsWritableProbeTest extends TestCase
     {
         $probe = new CacheIsWritableProbe($this->app->make(Repository::class), 'foo');
 
+        self::assertNotEmpty($probe->getName());
         self::assertTrue($probe->isHealthy());
     }
 

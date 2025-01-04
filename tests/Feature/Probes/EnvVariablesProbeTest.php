@@ -23,6 +23,7 @@ class EnvVariablesProbeTest extends TestCase
             attributes: [],
         );
 
+        self::assertNotEmpty($probe->getName());
         self::assertTrue($probe->isHealthy());
     }
 

@@ -18,6 +18,7 @@ class DatabaseConnectionProbeTest extends TestCase
     {
         $probe = new DatabaseConnectionProbe(config('database.default'), $this->app->make(ConnectionResolverInterface::class));
 
+        self::assertNotEmpty($probe->getName());
         self::assertTrue($probe->isHealthy());
     }
 
