@@ -51,7 +51,7 @@ class ControllerTest extends TestCase
                 'errors',
             ])
             ->assertJson([
-                'message' => 'ne ok',
+                'message' => 'Failed health check probes',
                 'errors' => [
                     'Failed foo with message "bar"',
                 ],

@@ -54,7 +54,7 @@ class HealthCheckerResource extends JsonResource
     {
         $data = ['message' => 'ok'];
         if ($this->resource->hasFailed()) {
-            $data['message'] = 'ne ok';
+            $data['message'] = 'Failed health check probes';
             $data['errors'] = $this->resource->getErrors();
         }
 
