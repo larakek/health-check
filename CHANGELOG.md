@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/larakek/health-check/compare/master...v1.x)
 
+## v1.2.0 - 2026-06-05
+
+* Updated php and laravel versions
+
 ## v1.1.1 - 2025-07-03
 
 * Fixed failed probes message
