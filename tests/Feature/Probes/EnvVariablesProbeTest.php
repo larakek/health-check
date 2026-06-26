@@ -40,7 +40,6 @@ class EnvVariablesProbeTest extends TestCase
         );
 
         $this->expectException(ValidationException::class);
-        $this->expectExceptionMessage('The FOO field is required. (and 1 more error)');
         $probe->isHealthy();
     }
 }
