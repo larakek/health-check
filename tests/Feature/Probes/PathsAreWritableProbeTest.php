@@ -22,7 +22,7 @@ class PathsAreWritableProbeTest extends TestCase
         $probe = new PathsAreWritableProbe(
             $this->app->make(Filesystem::class),
             $this->app,
-            ['paths' => []],
+            [],
         );
 
         self::assertNotEmpty($probe->getName());

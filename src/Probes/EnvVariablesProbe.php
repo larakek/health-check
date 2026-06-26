@@ -51,10 +51,10 @@ class EnvVariablesProbe implements Probe
     public function isHealthy(): bool
     {
         Validator::validate(
-            data: $this->data,
-            rules: $this->rules,
-            messages: $this->messages,
-            attributes: $this->attributes,
+            $this->data,
+            $this->rules,
+            $this->messages,
+            $this->attributes,
         );
 
         return true;

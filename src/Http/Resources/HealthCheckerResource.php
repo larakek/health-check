@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Larakek\HealthCheck\Http\Resources;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceResponse;
 use Larakek\HealthCheck\ErrorBag;
@@ -50,7 +49,7 @@ class HealthCheckerResource extends JsonResource
     /**
      * @return array<string,mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray($request): array
     {
         $data = ['message' => 'ok'];
         if ($this->resource->hasFailed()) {
