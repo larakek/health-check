@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/larakek/health-check/compare/master...v1.x)
 
+## v1.3.1 - 2026-06-26
+
+* Fixed wrong tag
+
 ## v1.3.0 - 2026-06-26
 
 * Added laravel 8 support
