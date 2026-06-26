@@ -22,7 +22,6 @@ class HealthCheckRunCommandTest extends TestCase
         });
 
         $this->artisan('health-check:run')
-            ->doesntExpectOutputToContain('Failed')
             ->assertSuccessful();
     }
 

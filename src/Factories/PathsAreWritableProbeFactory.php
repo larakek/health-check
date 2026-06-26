@@ -23,9 +23,9 @@ class PathsAreWritableProbeFactory
     public function __invoke(array $params): PathsAreWritableProbe
     {
         return new PathsAreWritableProbe(
-            filesystem: $this->filesystem,
-            application: $this->application,
-            paths: $params['paths'],
+            $this->filesystem,
+            $this->application,
+            $params['paths'],
         );
     }
 }
